@@ -12,11 +12,11 @@ The design of OPQBox2 is influenced by our experience with the first generation 
 
 We performed a [pilot study of our first generation hardware and software](http://openpowerquality.org/technology/g1-pilot-study.html), and one of the results of this study are the following major requirements for OPQBox2:
 
-  * **Support event recording upon power cutout.** OPQBox2 includes a Li-Po battery so that the box can record an event if power is interrupted prior to shutdown. Also to support this requirement, OPQBox2 includes nonvolatile 64K EEPROM memory.
-  
+  * **Support event recording upon power cutout.** OPQBox2 adds an 8k of ferromagnetic RAM(FRAM) IC.  Fram will be used as a circular buffer, containing 0.5s of high resolution voltage measurements. Fram will maintain its state through a power cycle, which will be sent to the cloud once the power-grid comes back online.
+ 
   * **Satisfy IEEE PQ standards.**  This includes 256 samples per waveform and locking to 60Hz input.
   
-  * **Improve data quality through dual transformers**. OPQBox2 is designed so that the transformer used to power the device is independent from the transformer used to collect PQ data.
+  * **Improve data quality through removal of the voltage sensing transformer.** Using a transformer for voltage measurements makes the device hard to calibrate. Furthermore we found that wall-wart transformers distort the line voltage.
   
 Summary of component changes
 ----------------------------
@@ -24,11 +24,11 @@ Summary of component changes
 Here is a summary of component changes proposed for OPQBox2:
 
  
-                | OPQBox1 | OPQBox2
+| OPQBox1 | OPQBox2
 --------------- | ------- | -------
 **Power**       |         | 
-                | 12V transformer for measurement | Isolated 5V DC-DC
-                | 40-10V DC for power | Unisolated capacitive PSU
+                | 12V transformer for isolated voltage sensing | Resistor Divider for direct voltage sensing 
+                | 40-10V DC for power | Isolated 5V DC-DC,  Unisolated capacitive PSU
 **Measurement** |         |
                 | 4KSPS 16Bit ADC | 50 KSPS 14/16Bit ADC
                 | Raspberry Pi for processing/WiFi | Raspberry PI for WiFi only
@@ -54,8 +54,8 @@ Measurement isolation design
 
 Design notes:
 
-  * Measurement is isolated via amc1100 isolation amplifier.
-  * Resistor divider for measurement.
+  * Measurement is isolated via TI [amc1100](http://www.ti.com/product/amc1100) isolation amplifier.
+  * Resistor divider for voltage measurement.
   * Shielded resistors for divider.
 
 Safety
@@ -66,7 +66,7 @@ We have domain knowledge in measurement/DSP, but not PSU design and consumer pro
   * Isolated PSU for measurements and communications.
   * EMI, fuse, component rating... etc.
   * Isolation for measurement.
-  * Capacitive power supply.
+  * Capacitive power supply, according to Microchip [AN954](http://ww1.microchip.com/downloads/en/AppNotes/00954A.pdf).
 
 Additional design documents
 ---------------------------
