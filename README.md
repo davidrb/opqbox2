@@ -83,8 +83,8 @@ Additional design documents
  
   * [OPQBOX2 pdf schematic](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.pdf)
   * [Bill of Materials](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/Schematics/BOM.txt)
-   * [Mentor graphics PADS schematic of OPQBOX2](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.sch)
-   * [PADS library](https://github.com/openpowerquality/opqbox2/tree/master/Schematics/Library)
+  * [Mentor graphics PADS schematic of OPQBOX2](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.sch)
+  * [PADS library](https://github.com/openpowerquality/opqbox2/tree/master/Schematics/Library)
   
 Questions for review
 ---------------------
