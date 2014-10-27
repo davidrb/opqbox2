@@ -35,6 +35,16 @@ Measurement (OPQBox1) | Measurement (OPQBox2)
 Raspberry Pi for processing/WiFi | Raspberry PI for WiFi only
  | 72Mhz Arm+FPU
  | Raspberry PI can be replaced with CAN/RF/Ethernet/GSM module
+ 
+ | OPQBox1 | OPQBox2
+--- | --- | ---
+Power | 12V transformer for measurement | Isolated 5V DC-DC
+      | 40-10V DC for power | Unisolated capacitive PSU
+Measurement | 4KSPS 16Bit ADC | 50 KSPS 14/16Bit ADC
+      | Raspberry Pi for processing/WiFi | Raspberry PI for WiFi only
+      |  | 72Mhz Arm+FPU
+      |  | PI can be replaced with CAN/RF/Ethernet/GSM module
+      
 
 
 that's all.
