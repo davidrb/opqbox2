@@ -24,7 +24,7 @@ Summary of component changes
 Here is a summary of component changes proposed for OPQBox2:
 
  
-| OPQBox1 | OPQBox2
+                | OPQBox1 | OPQBox2
 --------------- | ------- | -------
 **Power**       |         | 
                 | 12V transformer for isolated voltage sensing | Resistor Divider for direct voltage sensing 
@@ -34,8 +34,8 @@ Here is a summary of component changes proposed for OPQBox2:
                 | Raspberry Pi for processing/WiFi | Raspberry PI for WiFi only
                 |         | 72Mhz Arm+FPU
                 |         | PI can be replaced with CAN/RF/Ethernet/GSM module
-      
-  
+
+
 Capacitive PSU design
 ---------------------
 
