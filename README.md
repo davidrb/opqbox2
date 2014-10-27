@@ -91,4 +91,6 @@ Here are the issues we are most concerned about.
   * Do you have any recommendations should we decide to pursue UL certification?
   * Is there a way to shield the measurements circuit (such as adding a shielding can or PCB moat)? Is it worth the trouble?
   
-Thanks so much for your time!  If you would like to meet in person or via teleconference to discuss this design, we would be happy to arrange that. If you can reply with comments via email, that would be great as well. 
+If you would like to meet in person or via teleconference to discuss this design, we would be happy to arrange that. If you can reply with comments to johnson@hawaii.edu, that would be great. 
+
+Thanks so much for your time!  
