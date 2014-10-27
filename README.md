@@ -38,19 +38,6 @@ Here is a summary of component changes proposed for OPQBox2:
                 |         | 72Mhz Arm+FPU
                 |         | PI can be replaced with CAN/RF/Ethernet/GSM module
       
-
-
-Safety Issues
--------------
-
-We have domain knowledge in measurement/DSP, but not PSU design and consumer products. From a safety perspective, we have implemented the following:
-
-  * Isolated PSU for measurements and communications.
-  * EMI, fuse, component rating... etc.
-  * Isolation for measurement.
-  * Capacitive power supply.
-  
-We request your guidance on what we can do to improve safety further.
   
 Capacitive PSU design
 ---------------------
@@ -74,6 +61,16 @@ Design notes:
   * Resistor divider for measurement.
   * Shielded resistors for divider.
 
+Safety
+------
+
+We have domain knowledge in measurement/DSP, but not PSU design and consumer products. From a safety perspective, we have implemented the following:
+
+  * Isolated PSU for measurements and communications.
+  * EMI, fuse, component rating... etc.
+  * Isolation for measurement.
+  * Capacitive power supply.
+
 Additional design documents
 ---------------------------
 
@@ -83,6 +80,8 @@ Additional design documents
   * [Mentor graphics PADS schematic of OPQBOX2](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.sch)
   * [PADS library](https://github.com/openpowerquality/opqbox2/tree/master/Schematics/Library)
   
+
+
 Summary of questions for review
 -------------------------------
 
