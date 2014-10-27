@@ -11,20 +11,20 @@ Currently, OPQBox2 is in the design stage.  We are circulating its design now in
 High level requirements
 -----------------------
 
-The design of OPQBox2 is influenced by our experience with the first generation OPQBox.  Design and documentation information about our first generation hardware is available at the [OPQBox1 repository](https://github.com/openpowerquality/opqbox1). 
+The design of OPQBox2 is influenced by our experience with the first generation OPQBox.  Design information about our first generation hardware is available at the [OPQBox1 repository](https://github.com/openpowerquality/opqbox1). 
 
 We performed a [pilot study of our first generation hardware and software](http://openpowerquality.org/technology/g1-pilot-study.html), and one of the results of this study are the following major requirements for OPQBox2:
 
-  * Support event recording upon power cutout. OPQBox2 includes a Li-Po battery so that the box can record an event if power is interrupted prior to shutdown. Also to support this requirement, OPQBox2 includes nonvolatile 64K EEPROM memory.
+  * **Support event recording upon power cutout.** OPQBox2 includes a Li-Po battery so that the box can record an event if power is interrupted prior to shutdown. Also to support this requirement, OPQBox2 includes nonvolatile 64K EEPROM memory.
   
-  * Satisfy IEEE PQ standards.  This includes 256 samples per waveform and locking to 60Hz input.
+  * **Satisfy IEEE PQ standards.**  This includes 256 samples per waveform and locking to 60Hz input.
   
-  * Improve data quality through dual transformers. OPQBox2 has an internally fused UL-listed dual secondary transformer so that the transformer used to power the device is independent from the transformer used to collect PQ data.
+  * **Improve data quality through dual transformers**. OPQBox2 is designed so that the transformer used to power the device is independent from the transformer used to collect PQ data.
   
 Summary of component changes
 ----------------------------
 
-Here are the primary proposed hardware changes for OPQBox2 that impact on power and measurement:
+Here is a summary of component changes proposed for OPQBox2:
 
  
                 | OPQBox1 | OPQBox2
@@ -50,6 +50,8 @@ We have domain knowledge in measurement/DSP, but not PSU design and consumer pro
   * Isolation for measurement.
   * Capacitive power supply.
   
+We request your guidance on what we can do to improve safety further.
+  
 Capacitive PSU design
 ---------------------
 
@@ -73,7 +75,7 @@ Design notes:
   * Resistor divider for measurement.
   * Shielded resistors for divider.
 
-Question: Is it possible to add a shielding can/ PCB moat to this in a safe way?
+Question: Is it possible to add a shielding can/PCB moat to this in a safe way?
 
 Additional design documents
 ---------------------------
