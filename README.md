@@ -22,25 +22,16 @@ We performed a [pilot study of our first generation hardware and software](http:
   * Improve data quality through dual transformers. OPQBox2 has an internally fused UL-listed dual secondary transformer so that the transformer used to power the device is independent from the transformer used to collect PQ data.
   
 
-Here are some additional details on the proposed changes for OPQBox2:
+Here are some details on the proposed hardware changes for OPQBox2 with respect to power and measurement:
 
-Power (OPQBox1) | Power (OPQBox2)
-------------- | -------------
-12V transformer for measurement | Isolated 5V DC-DC
-40-10V DC for power | Unisolated capacitive PSU
-
-Measurement (OPQBox1) | Measurement (OPQBox2)
-------------- | -------------
-4KSPS 16Bit ADC | 50 KSPS 14/16Bit ADC
-Raspberry Pi for processing/WiFi | Raspberry PI for WiFi only
- | 72Mhz Arm+FPU
- | Raspberry PI can be replaced with CAN/RF/Ethernet/GSM module
  
  | OPQBox1 | OPQBox2
---- | --- | ---
-Power | 12V transformer for measurement | Isolated 5V DC-DC
+--------------- | --- | ---
+**Power** | | 
+      | 12V transformer for measurement | Isolated 5V DC-DC
       | 40-10V DC for power | Unisolated capacitive PSU
-Measurement | 4KSPS 16Bit ADC | 50 KSPS 14/16Bit ADC
+**Measurement** | |
+      | 4KSPS 16Bit ADC | 50 KSPS 14/16Bit ADC
       | Raspberry Pi for processing/WiFi | Raspberry PI for WiFi only
       |  | 72Mhz Arm+FPU
       |  | PI can be replaced with CAN/RF/Ethernet/GSM module
