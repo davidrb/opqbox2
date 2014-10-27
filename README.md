@@ -4,7 +4,7 @@ OPQBOX 2
 Overview
 --------
 
-This repository will eventually hold schematics, firmware, software, and documentation for the second generation Open Power Quality metering device (OPQBox2). 
+This repository provides the proposed schematics for the second generation Open Power Quality metering device (OPQBox2). 
 
 Currently, OPQBox2 is in the design stage.  We are circulating its design now in order to solicit feedback and make improvements prior to layout. We greatly appreciate your willingness to provide us with feedback.
 
