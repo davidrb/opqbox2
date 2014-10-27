@@ -21,8 +21,8 @@ We performed a [pilot study of our first generation hardware and software](http:
   
   * Improve data quality through dual transformers. OPQBox2 has an internally fused UL-listed dual secondary transformer so that the transformer used to power the device is independent from the transformer used to collect PQ data.
   
-Component changes
------------------
+Summary of component changes
+----------------------------
 
 Here are the primary proposed hardware changes for OPQBox2 that impact on power and measurement:
 
@@ -40,8 +40,8 @@ Here are the primary proposed hardware changes for OPQBox2 that impact on power 
       
 
 
-Safety
-------
+Safety Issues
+-------------
 
 We have domain knowledge in measurement/DSP, but not PSU design and consumer products. From a safety perspective, we have implemented the following:
 
@@ -49,16 +49,46 @@ We have domain knowledge in measurement/DSP, but not PSU design and consumer pro
   * EMI, fuse, component rating... etc.
   * Isolation for measurement.
   * Capacitive power supply.
+  
+Capacitive PSU design
+---------------------
+
+![capacitive PSU](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/capacitive-psu.png)
+
+Design notes:
+
+  * Input is fused and protected by a varistor. 
+  * R25 for bleeding C1 and suppressing spikes.
+  * 12mA output, we are driving it at 10mA through a regulator to the isolation amplifier (see below).
+
+Measurement isolation design
+----------------------------
+
+![capacitive PSU](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/measurement-isolation.png)
 
 
+Design notes:
 
+  * Measurement is isolated via amc1100 isolation amplifier.
+  * Resistor divider for measurement.
+  * Shielded resistors for divider.
 
+Question: Is it possible to add a shielding can/ PCB moat to this in a safe way?
 
+Additional design documents
+---------------------------
 
-The directory structure is as follows:
+  * [Mentor graphics PADS schematic of OPQBOX2](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.sch)
+  * [OPQBOX2 pdf schematic](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.pdf)
+  * [PADS library](https://github.com/openpowerquality/opqbox2/tree/master/Schematics/Library)
+  * [Bill of Materials](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/Schematics/BOM.txt)
+  
+Questions for review
+---------------------
 
-
- - Schematics. Contains schematics and bill of materials. 
- - Firmware. SMT32 Firmware and documentation.
- - Software: Raspberry PI and Linux software.
-
+  * Is this a safe design?
+  * Are any changes required for UL certification?
+  * Is there a way to shield the measurements circuit? Is it worth the trouble?
+  * Do you have any recommendations to improve safety or measurement?
+  
+Thanks so much for your time!
