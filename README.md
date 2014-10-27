@@ -68,14 +68,11 @@ Measurement isolation design
 
 ![capacitive PSU](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/measurement-isolation.png)
 
-
 Design notes:
 
   * Measurement is isolated via amc1100 isolation amplifier.
   * Resistor divider for measurement.
   * Shielded resistors for divider.
-
-Question: Is it possible to add a shielding can/PCB moat to this in a safe way?
 
 Additional design documents
 ---------------------------
@@ -86,12 +83,12 @@ Additional design documents
   * [Mentor graphics PADS schematic of OPQBOX2](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.sch)
   * [PADS library](https://github.com/openpowerquality/opqbox2/tree/master/Schematics/Library)
   
-Questions for review
----------------------
+Summary of questions for review
+-------------------------------
 
-  * Is this a safe design?
-  * Are any changes required for UL certification?
-  * Is there a way to shield the measurements circuit? Is it worth the trouble?
-  * Do you have any recommendations to improve safety or measurement?
+  * Do you have any recommendations to improve safety?
+  * Do you have any recommendations to improve measurement accuracy, precision, or reliability?
+  * Do you have any recommendations should we decide to pursue UL certification?
+  * Is there a way to shield the measurements circuit (such as adding a shielding can or PCB moat)? Is it worth the trouble?
   
 Thanks so much for your time!
