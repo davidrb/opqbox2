@@ -34,9 +34,11 @@
         <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
 
+<p>The mission of the Open Power Quality project is to design and implement open source hardware, software, and data for low cost, crowd-sourced power quality monitoring, storage, and analysis. For more details, please see our <a href="http://openpowerquality.org">home page</a>.</p>
+
 <p>This repository provides the proposed schematics for the second generation Open Power Quality metering device (OPQBox2). </p>
 
-<p>Currently, OPQBox2 is in the design stage.  We are circulating its design now in order to solicit feedback and make improvements prior to layout. We greatly appreciate your willingness to provide us with feedback.</p>
+<p>Currently, OPQBox2 is in the design stage.  We are circulating the design to solicit feedback and make improvements prior to layout. We greatly appreciate your willingness to provide us with feedback.</p>
 
 <h2>
 <a name="high-level-requirements" class="anchor" href="#high-level-requirements"><span class="octicon octicon-link"></span></a>High level requirements</h2>
@@ -46,9 +48,9 @@
 <p>We performed a <a href="http://openpowerquality.org/technology/g1-pilot-study.html">pilot study of our first generation hardware and software</a>, and one of the results of this study are the following major requirements for OPQBox2:</p>
 
 <ul>
-<li><p><strong>Support event recording upon power cutout.</strong> OPQBox2 includes a Li-Po battery so that the box can record an event if power is interrupted prior to shutdown. Also to support this requirement, OPQBox2 includes nonvolatile 64K EEPROM memory.</p></li>
+<li><p><strong>Support event recording upon power cutout.</strong> OPQBox2 adds an 8k of ferromagnetic RAM(FRAM) IC.  Fram will be used as a circular buffer, containing 0.5s of high resolution voltage measurements. Fram will maintain its state through a power cycle, which will be sent to the cloud once the power-grid comes back online.</p></li>
 <li><p><strong>Satisfy IEEE PQ standards.</strong>  This includes 256 samples per waveform and locking to 60Hz input.</p></li>
-<li><p><strong>Improve data quality through dual transformers</strong>. OPQBox2 is designed so that the transformer used to power the device is independent from the transformer used to collect PQ data.</p></li>
+<li><p><strong>Improve data quality through removal of the voltage sensing transformer.</strong> Using a transformer for voltage measurements makes the device hard to calibrate. Furthermore we found that wall-wart transformers distort the line voltage.</p></li>
 </ul>
 
 <h2>
@@ -72,13 +74,13 @@
 </tr>
 <tr>
 <td></td>
-<td>12V transformer for measurement</td>
-<td>Isolated 5V DC-DC</td>
+<td>12V transformer for isolated voltage sensing</td>
+<td>Resistor Divider for direct voltage sensing</td>
 </tr>
 <tr>
 <td></td>
 <td>40-10V DC for power</td>
-<td>Unisolated capacitive PSU</td>
+<td>Isolated 5V DC-DC,  Unisolated capacitive PSU</td>
 </tr>
 <tr>
 <td><strong>Measurement</strong></td>
@@ -129,8 +131,8 @@
 <p>Design notes:</p>
 
 <ul>
-<li>Measurement is isolated via amc1100 isolation amplifier.</li>
-<li>Resistor divider for measurement.</li>
+<li>Measurement is isolated via TI <a href="http://www.ti.com/product/amc1100">amc1100</a> isolation amplifier.</li>
+<li>Resistor divider for voltage measurement.</li>
 <li>Shielded resistors for divider.</li>
 </ul>
 
@@ -143,7 +145,7 @@
 <li>Isolated PSU for measurements and communications.</li>
 <li>EMI, fuse, component rating... etc.</li>
 <li>Isolation for measurement.</li>
-<li>Capacitive power supply.</li>
+<li>Capacitive power supply, according to Microchip <a href="http://ww1.microchip.com/downloads/en/AppNotes/00954A.pdf">AN954</a>.</li>
 </ul>
 
 <h2>
