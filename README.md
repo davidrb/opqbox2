@@ -25,6 +25,7 @@ We performed a [pilot study of our first generation hardware and software](http:
 Here are some additional details on the proposed changes for OPQBox2:
 
 OPQBox1 Power | OPQBox2 Power
+------------- | -------------
 12V transformer for measurement | Isolated 5V DC-DC
 
 that's all.
