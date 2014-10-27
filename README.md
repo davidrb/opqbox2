@@ -24,9 +24,18 @@ We performed a [pilot study of our first generation hardware and software](http:
 
 Here are some additional details on the proposed changes for OPQBox2:
 
-OPQBox1 Power | OPQBox2 Power
+Power (OPQBox1) | Power (OPQBox2)
 ------------- | -------------
 12V transformer for measurement | Isolated 5V DC-DC
+40-10V DC for power | Unisolated capacitive PSU
+
+Measurement (OPQBox1) | Measurement (OPQBox2)
+------------- | -------------
+4KSPS 16Bit ADC | 50 KSPS 14/16Bit ADC
+Raspberry Pi for processing/WiFi | Raspberry PI for WiFi only
+ | 72Mhz Arm+FPU
+ | Raspberry PI can be replaced with CAN/RF/Ethernet/GSM module
+
 
 that's all.
 
