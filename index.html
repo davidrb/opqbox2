@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="OPQBox2 : Second generation open power quality measurement device">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>OPQBox2</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/openpowerquality/opqbox2">View on GitHub</a>
+
+          <h1 id="project_title">OPQBox2</h1>
+          <h2 id="project_tagline">Second generation open power quality measurement device</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/openpowerquality/opqbox2/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/openpowerquality/opqbox2/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p>This repository provides the proposed schematics for the second generation Open Power Quality metering device (OPQBox2). </p>
+
+<p>Currently, OPQBox2 is in the design stage.  We are circulating its design now in order to solicit feedback and make improvements prior to layout. We greatly appreciate your willingness to provide us with feedback.</p>
+
+<h2>
+<a name="high-level-requirements" class="anchor" href="#high-level-requirements"><span class="octicon octicon-link"></span></a>High level requirements</h2>
+
+<p>The design of OPQBox2 is influenced by our experience with the first generation OPQBox.  Design information about our first generation hardware is available at the <a href="https://github.com/openpowerquality/opqbox1">OPQBox1 repository</a>. </p>
+
+<p>We performed a <a href="http://openpowerquality.org/technology/g1-pilot-study.html">pilot study of our first generation hardware and software</a>, and one of the results of this study are the following major requirements for OPQBox2:</p>
+
+<ul>
+<li><p><strong>Support event recording upon power cutout.</strong> OPQBox2 includes a Li-Po battery so that the box can record an event if power is interrupted prior to shutdown. Also to support this requirement, OPQBox2 includes nonvolatile 64K EEPROM memory.</p></li>
+<li><p><strong>Satisfy IEEE PQ standards.</strong>  This includes 256 samples per waveform and locking to 60Hz input.</p></li>
+<li><p><strong>Improve data quality through dual transformers</strong>. OPQBox2 is designed so that the transformer used to power the device is independent from the transformer used to collect PQ data.</p></li>
+</ul>
+
+<h2>
+<a name="summary-of-component-changes" class="anchor" href="#summary-of-component-changes"><span class="octicon octicon-link"></span></a>Summary of component changes</h2>
+
+<p>Here is a summary of component changes proposed for OPQBox2:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>OPQBox1</th>
+<th>OPQBox2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Power</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>12V transformer for measurement</td>
+<td>Isolated 5V DC-DC</td>
+</tr>
+<tr>
+<td></td>
+<td>40-10V DC for power</td>
+<td>Unisolated capacitive PSU</td>
+</tr>
+<tr>
+<td><strong>Measurement</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>4KSPS 16Bit ADC</td>
+<td>50 KSPS 14/16Bit ADC</td>
+</tr>
+<tr>
+<td></td>
+<td>Raspberry Pi for processing/WiFi</td>
+<td>Raspberry PI for WiFi only</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>72Mhz Arm+FPU</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>PI can be replaced with CAN/RF/Ethernet/GSM module</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a name="capacitive-psu-design" class="anchor" href="#capacitive-psu-design"><span class="octicon octicon-link"></span></a>Capacitive PSU design</h2>
+
+<p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/capacitive-psu.png" alt="capacitive PSU"></p>
+
+<p>Design notes:</p>
+
+<ul>
+<li>Input is fused and protected by a varistor. </li>
+<li>R25 for bleeding C1 and suppressing spikes.</li>
+<li>12mA output, we are driving it at 10mA through a regulator to the isolation amplifier (see below).</li>
+</ul>
+
+<h2>
+<a name="measurement-isolation-design" class="anchor" href="#measurement-isolation-design"><span class="octicon octicon-link"></span></a>Measurement isolation design</h2>
+
+<p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/measurement-isolation.png" alt="capacitive PSU"></p>
+
+<p>Design notes:</p>
+
+<ul>
+<li>Measurement is isolated via amc1100 isolation amplifier.</li>
+<li>Resistor divider for measurement.</li>
+<li>Shielded resistors for divider.</li>
+</ul>
+
+<h2>
+<a name="safety" class="anchor" href="#safety"><span class="octicon octicon-link"></span></a>Safety</h2>
+
+<p>We have domain knowledge in measurement/DSP, but not PSU design and consumer products. From a safety perspective, we have implemented the following:</p>
+
+<ul>
+<li>Isolated PSU for measurements and communications.</li>
+<li>EMI, fuse, component rating... etc.</li>
+<li>Isolation for measurement.</li>
+<li>Capacitive power supply.</li>
+</ul>
+
+<h2>
+<a name="additional-design-documents" class="anchor" href="#additional-design-documents"><span class="octicon octicon-link"></span></a>Additional design documents</h2>
+
+<ul>
+<li><a href="https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.pdf">OPQBOX2 pdf schematic</a></li>
+<li><a href="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/Schematics/BOM.txt">Bill of Materials</a></li>
+<li><a href="https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.sch">Mentor graphics PADS schematic of OPQBOX2</a></li>
+<li><a href="https://github.com/openpowerquality/opqbox2/tree/master/Schematics/Library">PADS library</a></li>
+</ul>
+
+<h2>
+<a name="summary-of-questions-for-review" class="anchor" href="#summary-of-questions-for-review"><span class="octicon octicon-link"></span></a>Summary of questions for review</h2>
+
+<p>Here are the issues we are most concerned about.</p>
+
+<ul>
+<li>Do you have any recommendations to improve safety?</li>
+<li>Do you have any recommendations to improve measurement accuracy, precision, or reliability?</li>
+<li>Do you have any recommendations should we decide to pursue UL certification?</li>
+<li>Is there a way to shield the measurements circuit (such as adding a shielding can or PCB moat)? Is it worth the trouble?</li>
+</ul>
+
+<p>Thanks so much for your time!  If you would like to meet in person or via teleconference to discuss this design, we would be happy to arrange that. If you can reply with comments via email, that would be great as well. </p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">OPQBox2 maintained by <a href="https://github.com/openpowerquality">openpowerquality</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
