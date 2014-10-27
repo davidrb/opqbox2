@@ -1,9 +1,11 @@
 Overview
 --------
 
+The mission of the Open Power Quality project is to design and implement open source hardware, software, and data for low cost, crowd-sourced power quality monitoring, storage, and analysis. For more details, please see our [home page](http://openpowerquality.org).
+
 This repository provides the proposed schematics for the second generation Open Power Quality metering device (OPQBox2). 
 
-Currently, OPQBox2 is in the design stage.  We are circulating its design now in order to solicit feedback and make improvements prior to layout. We greatly appreciate your willingness to provide us with feedback.
+Currently, OPQBox2 is in the design stage.  We are circulating the design to solicit feedback and make improvements prior to layout. We greatly appreciate your willingness to provide us with feedback.
 
 High level requirements
 -----------------------
