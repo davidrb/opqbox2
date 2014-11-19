@@ -5,14 +5,16 @@ The mission of the Open Power Quality project is to design and implement open so
 
 This repository provides the proposed schematics for the second generation Open Power Quality metering device (OPQBox2). 
 
-Currently, OPQBox2 is in the design stage.  We are circulating the design to solicit feedback and make improvements prior to layout. We greatly appreciate your willingness to provide us with feedback.
+Currently, OPQBox2 is in the design stage.  We are circulating this design to solicit feedback and make improvements prior to production. We greatly appreciate your willingness to provide us with feedback.
 
-High level requirements
------------------------
+Operational requirements
+------------------------
 
 The design of OPQBox2 is influenced by our experience with the first generation OPQBox.  Design information about our first generation hardware is available at the [OPQBox1 repository](https://github.com/openpowerquality/opqbox1). 
 
 We performed a [pilot study of our first generation hardware and software](http://openpowerquality.org/technology/g1-pilot-study.html), and one of the results of this study are the following major requirements for OPQBox2:
+
+  * **Operational parameters.**  OPQBox2 can be plugged into a standard U.S. two prong outlet with expected power at a frequency of 60 Hz and with a voltage of 110 V. It can operate under a frequency range of XX Hz to XX Hz and under a voltage range of XX V to XX V. Fuses will disable OPQBox2 when voltages or frequency exceed operational parameters.
 
   * **Support event recording upon power cutout.** OPQBox2 adds an 8k of ferromagnetic RAM(FRAM) IC.  Fram will be used as a circular buffer, containing 0.5s of high resolution voltage measurements. Fram will maintain its state through a power cycle, which will be sent to the cloud once the power-grid comes back online.
  
@@ -59,6 +61,12 @@ Design notes:
   * Measurement is isolated via TI [amc1100](http://www.ti.com/product/amc1100) isolation amplifier.
   * Resistor divider for voltage measurement.
   * Shielded resistors for divider.
+
+Layout
+------
+
+(Sergey, please add a section about layout here.)
+
 
 Safety
 ------
