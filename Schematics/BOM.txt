@@ -3,12 +3,12 @@
 |----------------------------------|
 |Item|Qty |Reference|Part Name     |
 |----+----+---------+--------------|
-|1   |4   |SPI UART |4POS_HEADER   |
+|1   |4   |SPI UART |4POS_HEADER   |  Decal
 |    |    |UART1-2  |              |
-|2   |1   |U2       |AD7684        |
-|3   |1   |U1       |AMC1100       |
-|4   |1   |V3       |AP1117IE33G   |
-|5   |1   |U4       |ARM_JTAG_ST   |
+|2   |1   |U2       |AD7684        |  Decal
+|3   |1   |U1       |AMC1100       |  Decal
+|4   |1   |V3       |AP1117IE33G   |  Decal
+|5   |1   |U4       |ARM_JTAG_ST   |  Decal
 |6   |15  |C7 C10-18|CAP0603,0.1uF |
 |    |    |C25      |              |
 |    |    |C27-28   |              |
@@ -21,7 +21,7 @@
 |11  |1   |C33      |CAP0603,3.3uF |
 |12  |1   |C3       |CAP0603,470pF |
 |13  |1   |C29      |CAP0603,??    |
-|14  |2   |C2 C5    |CAP-AE4,470uF |
+|14  |2   |C2 C5    |CAP-AE4,470uF |	
 |15  |1   |C1       |Y class	   |
 |16  |1   |D2       |DIODE         |
 |17  |3   |F1-3     |FUSE          |
