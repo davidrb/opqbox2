@@ -50,13 +50,13 @@
 |36  |1   |U9       |SP4020-01FTG-C|	
 |37  |1   |U3       |STM32F373CCT6 |	Decal
 |38  |1   |V1       |TC1014-5.0    |	Decal
-|39  |2   |LINE     |TERMINAL      |
+|39  |2   |LINE     |TERMINAL      |	Decal	1217861
 |    |    |NEUTRAL  |              |
-|40  |8   |T1-8     |TEST_POINT    |
-|41  |1   |MOV1     |TMOV25SP230M  |
-|42  |1   |U6       |USBA          |
-|43  |1   |U5       |USBLC6-2P6    |
-|44  |1   |Y1       |XTAL1,32768   |
-|45  |1   |Y2       |XTAL1,8M      |
-|46  |1   |D1       |ZENER-DIODE   |
+|40  |8   |T1-8     |TEST_POINT    |	Decal
+|41  |1   |MOV1     |TMOV25SP230M  |	Decal
+|42  |1   |U6       |USBA          |	
+|43  |1   |U5       |USBLC6-2P6    |	Decal
+|44  |1   |Y1       |XTAL1,32768   |	Decal
+|45  |1   |Y2       |XTAL1,8M      |	Decal
+|46  |1   |D1       |ZENER-DIODE   |	DO-35
 |----------------------------------|
