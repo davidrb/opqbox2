@@ -5,7 +5,7 @@ The mission of the Open Power Quality project is to design and implement open so
 
 This repository provides the proposed schematics for the second generation Open Power Quality metering device (OPQBox2). 
 
-Currently, OPQBox2 is in the final design stage.  We are circulating this design to solicit feedback and make improvements prior to production. We greatly appreciate your willingness to provide us with feedback.
+OPQBox2 is in the final design stage.  We are circulating this design to solicit feedback and make improvements prior to production. We greatly appreciate your willingness to provide us with feedback.
 
 Operational requirements
 ------------------------
@@ -14,33 +14,31 @@ The design of OPQBox2 is influenced by our experience with the first generation 
 
 We performed a [pilot study of our first generation hardware and software](http://openpowerquality.org/technology/g1-pilot-study.html), and one of the results of this study are the following major requirements for OPQBox2:
 
-  * **Operational parameters.**  OPQBox2 can be plugged into a standard U.S. two prong outlet with expected power at a frequency of 60 Hz and with a voltage of 110 V. It can operate under a frequency range of 50 Hz to 70 Hz and under a voltage range of 80 Vac to 200 Vac. Fuses will disable OPQBox2 in case of a fault. Our device plugs is ment to  bypass power filters and surge protectors. Thus it incorporates extra protection elements to keep the device operating safely during power disruptions.
+ * **Safety.**   Our device plugs is ment to  bypass power filters and surge protectors. Thus it incorporates extra protection elements to keep the device operating safely during power disruptions. Fuses will disable OPQBox2 in case of a fault. All of the user accesible components are isolated from the mains.
 
-  * **Support event recording upon power failure.** OPQBox2 adds up 512k of ferromagnetic RAM(FRAM) IC.  Fram will be used as a circular buffer, containing up to 1min of high resolution voltage measurements. Fram will maintain its state through a power cycle, which will be sent to the cloud once the power-grid comes back online.
- 
-  * **Satisfy IEEE PQ standards.**  Sampling is phase locked to the utility frequency. The 16 bit 100KSPS ADC allows for 5mV resolution with over 1024 points per grid cylce. On board ARM floating point DSP is able to perform the IEEE 1159 outlined analisys, as well as user defined code.
+ * **Satisfy IEEE PQ standards.**  OPQBox2 can be plugged into a standard U.S. two prong outlet with expected power at a frequency of 60 Hz and with a voltage of 110 V. It can operate under a frequency range of 50 Hz to 70 Hz and under a voltage range of 80 Vac to 200 Vac. Sampling is phase locked to the utility frequency. The 16 bit 100KSPS ADC allows for 5mV resolution with over 1024 points per grid cycle. On board ARM floating point DSP is able to perform the IEEE 1159 outlined analysis, as well as user defined code.
+
+ * **Support event recording upon power failure.** OPQBox2 adds up to 512k of ferromagnetic RAM(FRAM) IC.  Fram will be used as a circular buffer, containing up to 1 min of high resolution voltage measurements. Fram will maintain its state through a power cycle, which will be sent to the cloud once the power-grid comes back online.
+
+* **Connectivity** OPQBox 2 is designed to be the deployed as a part of a distributed real-time power quality monitoring network. As such it offers a large number of interface options, including serial, USB WIFI and cellular network. The initial development will focus on WIFI, and a serial implementation.
   
-  * **Improve data quality through removal of the voltage sensing transformer.** Using a transformer for voltage measurements makes the device hard to calibrate. Furthermore we found that wall-wart transformers distort the line voltage.
-  
-Summary of component changes
+Changes From OPQBox 1.
 ----------------------------
-
+OPQBox2 is a complete redesign from the previous generation. It replaces the voltage sensing transformer with an isolation amplifier. The sampling rate has increased from 4kSPS to up to 100kSPS. In order to keep up with the faster sampling a dedicated ARM DSP is used to control the sampling and 
 Here is a summary of component changes proposed for OPQBox2:
 
  
                 | OPQBox1 | OPQBox2
 --------------- | ------- | -------
-**Power**       |         | 
-                | 12V transformer for isolated voltage sensing | Resistor Divider for direct voltage sensing 
-                | 40-10V DC for power | Isolated 5V DC-DC,  Unisolated capacitive PSU
-**Measurement** |         |
-                | 4KSPS 16Bit ADC | 100 KSPS 16Bit ADC
-                | Raspberry Pi for processing/WiFi | Raspberry PI for communication and configuration only.
-                |         | 72Mhz Arm+FPU
+**Voltage sensing/Isolation** | 12V transformer wall plug transformer | Isolation amplifier.
+**Power**       | 12V transformer | Isolated 5V DC-DC,  Unisolated capacitive PSU
+**ADC**         | 4KSPS 16Bit ADC | 100 KSPS 16Bit ADC
+**Processing**  | Raspberry Pi for processing/WiFi | Dedicated ARM DSP for real time processing.
+                |         | Raspberry PI for communication and configuration only.
                 |         | PI can be replaced with CAN/RF/Ethernet/GSM module
 
 
-Capacitive PSU design
+Capacitive PSU Design
 ---------------------
 
 ![capacitive PSU](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/capacitive-psu.png)
@@ -60,7 +58,7 @@ Design notes:
 
   * Measurement is isolated via TI [amc1100](http://www.ti.com/product/amc1100) isolation amplifier.[AD7684](http://www.analog.com/en/analog-to-digital-converters/ad-converters/ad7684/products/product.html) ADC.
   * Flame proof, pulse withstanding resistors for voltage measurement
-  * [TMOV25SP230M ](http://www.littelfuse.com/products/varistors/thermally-protected/tmov25s/tmov25sp230m.aspx) MOV and a TVC for surge protection. T
+  * [TMOV25SP230M ](http://www.littelfuse.com/products/varistors/thermally-protected/tmov25s/tmov25sp230m.aspx) MOV and a TVC for surge protection. 
 
 Layout
 ------
@@ -87,7 +85,8 @@ Additional design documents
 ---------------------------
 
  
-  * [OPQBOX2 pdf schematic](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.pdf)
+  * [OPQBOX2 pdf schematic](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2_schematic.pdf)
+  * [OPQBOX2 pdf layout](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2_layout.pdf)
   * [Bill of Materials](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/Schematics/BOM.txt)
   * [Mentor graphics PADS schematic of OPQBOX2](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.sch)
   * [PADS library](https://github.com/openpowerquality/opqbox2/tree/master/Schematics/Library)
