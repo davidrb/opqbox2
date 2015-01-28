@@ -24,8 +24,7 @@ We performed a [pilot study of our first generation hardware and software](http:
   
 Changes From OPQBox 1.
 ----------------------------
-OPQBox2 is a complete redesign from the previous generation. It replaces the voltage sensing transformer with an isolation amplifier. The sampling rate has increased from 4kSPS to up to 100kSPS. In order to keep up with the faster sampling a dedicated ARM DSP is used to control the sampling and 
-Here is a summary of component changes proposed for OPQBox2:
+OPQBox2 is a complete redesign from the previous generation. It replaces the voltage sensing transformer with an isolation amplifier. The sampling rate has increased from 4kSPS to up to 100kSPS. In order to keep up with the faster acquisition a dedicated ARM DSP is used to control the sampling and realtime processing. Here is a summary of component changes proposed for OPQBox2:
 
  
                 | OPQBox1 | OPQBox2
@@ -62,7 +61,7 @@ Design notes:
 
 Layout
 ------
-PCB layout is available in the schematics folder. It is provided as a PADs Layout file, as well as gerbers and pdf/image files. This design calls for a 2 layer FR4 board, and measures 200mm by 80mm.  PCB passed DFM check and is ready to be manufactured. This design is intended as an engineering sample. We expect to go through several iterations refining the design. Additional we are solicit comments and sugestions from the open source community. If you share our interest in distributed power quality measurement, don’t hesitate to contact us. 
+PCB layout is available in the schematics folder. It is provided as a PADs Layout file, as well as gerbers and pdf/image files. This design calls for a 2 layer FR4 board, and measures 200mm by 80mm.  PCB passed DFM check and is ready to be manufactured. This device is intended as an engineering sample. We expect to go through several iterations refining the design. Additional we are solicit comments and sugestions from the open source community. If you share our interest in distributed power quality measurement, don’t hesitate to contact us. 
 
 ![layout](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout.png)
 Full Layout. The Isolation barrier is clearly visible. Perhaps a cutout is appropriate to improve isolation?
