@@ -20,7 +20,7 @@ We performed a [pilot study of our first generation hardware and software](http:
 
  * **Support event recording upon power failure.** OPQBox2 adds up to 512k of ferromagnetic RAM(FRAM) IC.  Fram will be used as a circular buffer, containing up to 1 min of high resolution voltage measurements. Fram will maintain its state through a power cycle, which will be sent to the cloud once the power-grid comes back online.
 
-* **Connectivity** OPQBox 2 is designed to be the deployed as a part of a distributed real-time power quality monitoring network. As such it offers a large number of interface options, including serial, USB WIFI and cellular network. The initial development will focus on WIFI, and a serial implementation.
+* **Connectivity** OPQBox 2 is designed to be the deployed as a part of a distributed real-time power quality monitoring network. As such it offers a large number of interface options, including serial, USB, WIFI and cellular network. The initial development will focus on WIFI, and serial communication.
   
 Changes From OPQBox 1.
 ----------------------------
