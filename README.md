@@ -23,7 +23,7 @@ Operational requirements
 
 The design of OPQBox2 is influenced by our experience with the first generation OPQBox (OPQBox1).  Design information about our first generation hardware is available at the [OPQBox1 repository](https://github.com/openpowerquality/opqbox1). 
 
-We performed a [pilot study of our first generation hardware and software](http://openpowerquality.org/technology/g1-pilot-study.html), and one of the results of this study are the following major requirements for OPQBox2:
+We performed a [pilot study of our first generation hardware and software](http://openpowerquality.org/technology/g1-pilot-study.html), and one of the results of this study are the following major enhancements for OPQBox2:
 
  * **Safety.**  OPQBox2 is meant to bypass power filters and surge protectors. Thus it incorporates extra protection elements to keep the device operating safely during power disruptions. Fuses will disable OPQBox2 in case of a fault. All of the user accesible components are isolated from the mains.
 
@@ -33,8 +33,9 @@ We performed a [pilot study of our first generation hardware and software](http:
 
 * **Connectivity** OPQBox2 is designed to be the deployed as a part of a distributed real-time power quality monitoring network. As such it offers a large number of interface options, including serial, USB, WIFI and cellular network. The initial development will focus on WIFI, and serial communication.
   
-Changes From OPQBox 1.
-----------------------------
+Changes From OPQBox1
+--------------------
+
 OPQBox2 is a complete redesign from the previous generation. It replaces the voltage sensing transformer with an isolation amplifier. The sampling rate has increased from 4kSPS to up to 100kSPS. In order to keep up with the faster acquisition a dedicated ARM DSP is used to control the sampling and realtime processing. Here is a summary of component changes in OPQBox2:
 
  
