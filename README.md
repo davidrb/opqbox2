@@ -7,10 +7,10 @@ This repository provides the proposed schematics for the second generation Open 
 
 OPQBox2 is in the final design stage.  We are circulating this design to solicit feedback and make improvements prior to production. We greatly appreciate your willingness to provide us with feedback.
 
-Goals
------
+Goal
+----
 
-The purpose of OPQBox is to monitor voltage and frequency and detect departures from nominal levels.  It accomplishes this by sampling the waveform 256 times per cycle, extracting power quality measures (including frequency, RMS voltage, and THD), and then uploading data about these measures to the OPQHub service. 
+The goal of OPQBox is to monitor voltage and frequency and detect departures from nominal levels.  It accomplishes this by sampling the waveform 256 times per cycle, extracting power quality measures (including frequency, RMS voltage, and THD), and then uploading data about these measures to the OPQHub service. 
 
 OPQBox can be configured to send a "heartbeat" message to OPQHub to indicate that it is connected and functioning. This message normally includes low resolution voltage and frequency data.   
 
