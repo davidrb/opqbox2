@@ -32,31 +32,47 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h2>
-<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
 
 <p>The mission of the Open Power Quality project is to design and implement open source hardware, software, and data for low cost, crowd-sourced power quality monitoring, storage, and analysis. For more details, please see our <a href="http://openpowerquality.org">home page</a>.</p>
 
 <p>This repository provides the proposed schematics for the second generation Open Power Quality metering device (OPQBox2). </p>
 
-<p>Currently, OPQBox2 is in the design stage.  We are circulating the design to solicit feedback and make improvements prior to layout. We greatly appreciate your willingness to provide us with feedback.</p>
+<p>OPQBox2 is in the final design stage.  We are circulating this design to solicit feedback and make improvements prior to production. We greatly appreciate your willingness to provide us with feedback.</p>
 
 <h2>
-<a name="high-level-requirements" class="anchor" href="#high-level-requirements"><span class="octicon octicon-link"></span></a>High level requirements</h2>
+<a id="goal" class="anchor" href="#goal" aria-hidden="true"><span class="octicon octicon-link"></span></a>Goal</h2>
 
-<p>The design of OPQBox2 is influenced by our experience with the first generation OPQBox.  Design information about our first generation hardware is available at the <a href="https://github.com/openpowerquality/opqbox1">OPQBox1 repository</a>. </p>
+<p>The goal of OPQBox is to monitor voltage and frequency and detect departures from nominal levels.  It accomplishes this by sampling the waveform 256 times per cycle, extracting power quality measures (including frequency, RMS voltage, and THD), and then uploading data about these measures to the OPQHub service. </p>
 
-<p>We performed a <a href="http://openpowerquality.org/technology/g1-pilot-study.html">pilot study of our first generation hardware and software</a>, and one of the results of this study are the following major requirements for OPQBox2:</p>
+<p>OPQBox can be configured to send a "heartbeat" message to OPQHub to indicate that it is connected and functioning. This message normally includes low resolution voltage and frequency data.   </p>
+
+<p>When a power quality disturbance is detected by OPQBox, it sends a message to OPQHub that includes high resolution waveform data. </p>
+
+<p>We expect that OPQBoxes will be synchronized to within 1 millisecond through the use of NTP. This enables data from multiple OPQBoxes to be used to generate a global perspective on the state of the grid.  As a simple example, it can enable users to determine if their event is local to their own residence or instead grid-wide. </p>
+
+<h2>
+<a id="operational-requirements" class="anchor" href="#operational-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Operational requirements</h2>
+
+<p>The design of OPQBox2 is influenced by our experience with the first generation OPQBox (OPQBox1).  Design information about our first generation hardware is available at the <a href="https://github.com/openpowerquality/opqbox1">OPQBox1 repository</a>. </p>
+
+<p>We performed a <a href="http://openpowerquality.org/technology/g1-pilot-study.html">pilot study of our first generation hardware and software</a>, and one of the results of this study are the following major enhancements for OPQBox2:</p>
 
 <ul>
-<li><p><strong>Support event recording upon power cutout.</strong> OPQBox2 adds an 8k of ferromagnetic RAM(FRAM) IC.  Fram will be used as a circular buffer, containing 0.5s of high resolution voltage measurements. Fram will maintain its state through a power cycle, which will be sent to the cloud once the power-grid comes back online.</p></li>
-<li><p><strong>Satisfy IEEE PQ standards.</strong>  This includes 256 samples per waveform and locking to 60Hz input.</p></li>
-<li><p><strong>Improve data quality through removal of the voltage sensing transformer.</strong> Using a transformer for voltage measurements makes the device hard to calibrate. Furthermore we found that wall-wart transformers distort the line voltage.</p></li>
+<li><p><strong>Safety.</strong>  OPQBox2 is meant to bypass power filters and surge protectors. Thus it incorporates extra protection elements to keep the device operating safely during power disruptions. Fuses will disable OPQBox2 in case of a fault. All of the user accesible components are isolated from the mains.</p></li>
+<li><p><strong>Satisfy IEEE PQ standards.</strong>  OPQBox2 can be plugged into a standard U.S. two prong outlet with expected power at a frequency of 60 Hz and with a voltage of 120 V. It can operate under a frequency range of 50 Hz to 70 Hz and under a voltage range of 80 Vac to 200 Vac. Sampling is phase locked to the utility frequency. The 16 bit 100KSPS ADC allows for 5mV resolution with over 1024 points per grid cycle. On board ARM floating point DSP is able to perform the IEEE 1159 outlined analysis, as well as user defined code.</p></li>
+<li><p><strong>Support event recording upon power failure.</strong> OPQBox2 adds up to 512k of ferromagnetic RAM (FRAM) IC.  FRAM will be used as a circular buffer, containing up to 1 min of high resolution voltage measurements. FRAM will maintain its state through a power cycle, which will be sent to the cloud once the OPQBox2 comes back online.</p></li>
+</ul>
+
+<ul>
+<li>
+<strong>Connectivity</strong> OPQBox2 is designed to be the deployed as a part of a distributed real-time power quality monitoring network. As such it offers a large number of interface options, including serial, USB, WIFI and cellular network. The initial development will focus on WIFI, and serial communication.</li>
 </ul>
 
 <h2>
-<a name="summary-of-component-changes" class="anchor" href="#summary-of-component-changes"><span class="octicon octicon-link"></span></a>Summary of component changes</h2>
+<a id="changes-from-opqbox1" class="anchor" href="#changes-from-opqbox1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changes From OPQBox1</h2>
 
-<p>Here is a summary of component changes proposed for OPQBox2:</p>
+<p>OPQBox2 is a complete redesign from the previous generation. It replaces the voltage sensing transformer with an isolation amplifier. The sampling rate has increased from 4kSPS to up to 100kSPS. In order to keep up with the faster acquisition a dedicated ARM DSP is used to control the sampling and realtime processing. Here is a summary of component changes in OPQBox2:</p>
 
 <table>
 <thead>
@@ -68,39 +84,29 @@
 </thead>
 <tbody>
 <tr>
+<td><strong>Voltage sensing/Isolation</strong></td>
+<td>12V transformer wall plug transformer</td>
+<td>Isolation amplifier.</td>
+</tr>
+<tr>
 <td><strong>Power</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>12V transformer for isolated voltage sensing</td>
-<td>Resistor Divider for direct voltage sensing</td>
-</tr>
-<tr>
-<td></td>
-<td>40-10V DC for power</td>
+<td>12V transformer</td>
 <td>Isolated 5V DC-DC,  Unisolated capacitive PSU</td>
 </tr>
 <tr>
-<td><strong>Measurement</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
+<td><strong>ADC</strong></td>
 <td>4KSPS 16Bit ADC</td>
-<td>50 KSPS 14/16Bit ADC</td>
+<td>100 KSPS 16Bit ADC</td>
 </tr>
 <tr>
-<td></td>
+<td><strong>Processing</strong></td>
 <td>Raspberry Pi for processing/WiFi</td>
-<td>Raspberry PI for WiFi only</td>
+<td>Dedicated ARM DSP for real time processing.</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
-<td>72Mhz Arm+FPU</td>
+<td>Raspberry PI for communication and configuration only.</td>
 </tr>
 <tr>
 <td></td>
@@ -111,7 +117,7 @@
 </table>
 
 <h2>
-<a name="capacitive-psu-design" class="anchor" href="#capacitive-psu-design"><span class="octicon octicon-link"></span></a>Capacitive PSU design</h2>
+<a id="capacitive-psu-design" class="anchor" href="#capacitive-psu-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Capacitive PSU Design</h2>
 
 <p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/capacitive-psu.png" alt="capacitive PSU"></p>
 
@@ -124,50 +130,65 @@
 </ul>
 
 <h2>
-<a name="measurement-isolation-design" class="anchor" href="#measurement-isolation-design"><span class="octicon octicon-link"></span></a>Measurement isolation design</h2>
+<a id="measurement-isolation-design" class="anchor" href="#measurement-isolation-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Measurement isolation design</h2>
 
 <p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/measurement-isolation.png" alt="capacitive PSU"></p>
 
 <p>Design notes:</p>
 
 <ul>
-<li>Measurement is isolated via TI <a href="http://www.ti.com/product/amc1100">amc1100</a> isolation amplifier.</li>
-<li>Resistor divider for voltage measurement.</li>
-<li>Shielded resistors for divider.</li>
+<li>Measurement is isolated via TI <a href="http://www.ti.com/product/amc1100">amc1100</a> isolation amplifier.<a href="http://www.analog.com/en/analog-to-digital-converters/ad-converters/ad7684/products/product.html">AD7684</a> ADC.</li>
+<li>Flame proof, pulse withstanding resistors for voltage measurement</li>
+<li>
+<a href="http://www.littelfuse.com/products/varistors/thermally-protected/tmov25s/tmov25sp230m.aspx">TMOV25SP230M </a> MOV and a TVC for surge protection. </li>
 </ul>
 
 <h2>
-<a name="safety" class="anchor" href="#safety"><span class="octicon octicon-link"></span></a>Safety</h2>
+<a id="layout" class="anchor" href="#layout" aria-hidden="true"><span class="octicon octicon-link"></span></a>Layout</h2>
+
+<p>PCB layout is available in the schematics folder. It is provided as a PADs Layout file, as well as gerbers and pdf/image files. This design calls for a 2 layer FR4 board, and measures 200mm by 80mm.  PCB passed DFM check and is ready to be manufactured. This device is intended as an engineering sample. We expect to go through several iterations refining the design. </p>
+
+<p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout.png" alt="layout">
+Full Layout. The Isolation barrier is clearly visible. Perhaps a cutout is appropriate to improve isolation?</p>
+
+<p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout-top.png" alt="layout">
+Top copper, soldermask and silkscreen.
+<img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout-bottom.png" alt="layout">
+Bottom copper, soldermask and silkscreen.</p>
+
+<h2>
+<a id="safety" class="anchor" href="#safety" aria-hidden="true"><span class="octicon octicon-link"></span></a>Safety</h2>
 
 <p>We have domain knowledge in measurement/DSP, but not PSU design and consumer products. From a safety perspective, we have implemented the following:</p>
 
 <ul>
-<li>Isolated PSU for measurements and communications.</li>
+<li>Creepage/Clearance appropriate for mains power.</li>
+<li>Isolated power and sensing for all user serviceable components.</li>
+<li>Circuit Protection (MOV, TVC, etc).</li>
 <li>EMI, fuse, component rating... etc.</li>
-<li>Isolation for measurement.</li>
-<li>Capacitive power supply, according to Microchip <a href="http://ww1.microchip.com/downloads/en/AppNotes/00954A.pdf">AN954</a>.</li>
 </ul>
 
 <h2>
-<a name="additional-design-documents" class="anchor" href="#additional-design-documents"><span class="octicon octicon-link"></span></a>Additional design documents</h2>
+<a id="additional-design-documents" class="anchor" href="#additional-design-documents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Additional design documents</h2>
 
 <ul>
-<li><a href="https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.pdf">OPQBOX2 pdf schematic</a></li>
+<li><a href="https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2_schematic.pdf">OPQBOX2 pdf schematic</a></li>
+<li><a href="https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2_layout.pdf">OPQBOX2 pdf layout</a></li>
 <li><a href="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/Schematics/BOM.txt">Bill of Materials</a></li>
 <li><a href="https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.sch">Mentor graphics PADS schematic of OPQBOX2</a></li>
 <li><a href="https://github.com/openpowerquality/opqbox2/tree/master/Schematics/Library">PADS library</a></li>
 </ul>
 
 <h2>
-<a name="summary-of-questions-for-review" class="anchor" href="#summary-of-questions-for-review"><span class="octicon octicon-link"></span></a>Summary of questions for review</h2>
+<a id="summary-of-questions-for-review" class="anchor" href="#summary-of-questions-for-review" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary of questions for review</h2>
 
 <p>Here are the issues we are most concerned about.</p>
 
 <ul>
-<li>Do you have any recommendations to improve safety?</li>
-<li>Do you have any recommendations to improve measurement accuracy, precision, or reliability?</li>
-<li>Do you have any recommendations should we decide to pursue UL certification?</li>
-<li>Is there a way to shield the measurements circuit (such as adding a shielding can or PCB moat)? Is it worth the trouble?</li>
+<li>Should we use a cut-out to improve isolation? </li>
+<li>Do you have any other recommendations to improve safety?</li>
+<li>Do you have any other recommendations to improve measurement accuracy, precision, or reliability?</li>
+<li>Do you have any recommendations for certifications? (UL, IEEE, IEC, etc)</li>
 </ul>
 
 <p>If you would like to meet in person or via teleconference to discuss this design, we would be happy to arrange that. If you can reply with comments to <a href="mailto:johnson@hawaii.edu">johnson@hawaii.edu</a>, that would be great. </p>
