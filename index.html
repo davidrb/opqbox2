@@ -31,8 +31,8 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h2>
-<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
+        <h1>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h1>
 
 <p>The mission of the Open Power Quality project is to design and implement open source hardware, software, and data for low cost, crowd-sourced power quality monitoring, storage, and analysis. For more details, please see our <a href="http://openpowerquality.org">home page</a>.</p>
 
@@ -40,8 +40,8 @@
 
 <p>OPQBox2 is in the final design stage.  We are circulating this design to solicit feedback and make improvements prior to production. We greatly appreciate your willingness to provide us with feedback.</p>
 
-<h2>
-<a id="goal" class="anchor" href="#goal" aria-hidden="true"><span class="octicon octicon-link"></span></a>Goal</h2>
+<h1>
+<a id="goal" class="anchor" href="#goal" aria-hidden="true"><span class="octicon octicon-link"></span></a>Goal</h1>
 
 <p>The goal of OPQBox is to monitor voltage and frequency and detect departures from nominal levels.  It accomplishes this by sampling the waveform 256 times per cycle, extracting power quality measures (including frequency, RMS voltage, and THD), and then uploading data about these measures to the OPQHub service. </p>
 
@@ -51,8 +51,8 @@
 
 <p>We expect that OPQBoxes will be synchronized to within 1 millisecond through the use of NTP. This enables data from multiple OPQBoxes to be used to generate a global perspective on the state of the grid.  As a simple example, it can enable users to determine if their event is local to their own residence or instead grid-wide. </p>
 
-<h2>
-<a id="operational-requirements" class="anchor" href="#operational-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Operational requirements</h2>
+<h1>
+<a id="operational-requirements" class="anchor" href="#operational-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Operational requirements</h1>
 
 <p>The design of OPQBox2 is influenced by our experience with the first generation OPQBox (OPQBox1).  Design information about our first generation hardware is available at the <a href="https://github.com/openpowerquality/opqbox1">OPQBox1 repository</a>. </p>
 
@@ -69,8 +69,8 @@
 <strong>Connectivity.</strong> OPQBox2 is designed to be the deployed as a part of a distributed real-time power quality monitoring network. As such it offers a large number of interface options, including serial, USB, WIFI and cellular network. The initial development will focus on WIFI, and serial communication.</li>
 </ul>
 
-<h2>
-<a id="changes-from-opqbox1" class="anchor" href="#changes-from-opqbox1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changes From OPQBox1</h2>
+<h1>
+<a id="changes-from-opqbox1" class="anchor" href="#changes-from-opqbox1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changes From OPQBox1</h1>
 
 <p>OPQBox2 is a complete redesign from the previous generation. It replaces the voltage sensing transformer with an isolation amplifier. The sampling rate has increased from 4kSPS to up to 100kSPS. In order to keep up with the faster acquisition a dedicated ARM DSP is used to control the sampling and realtime processing. Here is a summary of component changes in OPQBox2:</p>
 
@@ -116,8 +116,8 @@
 </tbody>
 </table>
 
-<h2>
-<a id="capacitive-psu-design" class="anchor" href="#capacitive-psu-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Capacitive PSU Design</h2>
+<h1>
+<a id="capacitive-psu-design" class="anchor" href="#capacitive-psu-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Capacitive PSU Design</h1>
 
 <p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/capacitive-psu.png" alt="capacitive PSU"></p>
 
@@ -129,8 +129,8 @@
 <li>12mA output, we are driving it at 10mA through a regulator to the isolation amplifier (see below).</li>
 </ul>
 
-<h2>
-<a id="measurement-isolation-design" class="anchor" href="#measurement-isolation-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Measurement isolation design</h2>
+<h1>
+<a id="measurement-isolation-design" class="anchor" href="#measurement-isolation-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Measurement isolation design</h1>
 
 <p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/measurement-isolation.png" alt="capacitive PSU"></p>
 
@@ -143,33 +143,30 @@
 <a href="http://www.littelfuse.com/products/varistors/thermally-protected/tmov25s/tmov25sp230m.aspx">TMOV25SP230M </a> MOV and a TVC for surge protection. </li>
 </ul>
 
-<h2>
-<a id="layout" class="anchor" href="#layout" aria-hidden="true"><span class="octicon octicon-link"></span></a>Layout</h2>
+<h1>
+<a id="layout" class="anchor" href="#layout" aria-hidden="true"><span class="octicon octicon-link"></span></a>Layout</h1>
 
 <p>PCB layout is available in the schematics folder. It is provided as a PADs Layout file, as well as gerbers and pdf/image files. This design calls for a 2 layer FR4 board, and measures 200mm by 80mm.  PCB passed DFM check and is ready to be manufactured. This device is intended as an engineering sample. We expect to go through several iterations refining the design. </p>
 
-<p>Full Layout</p>
-
-<hr>
+<h3>
+<a id="full-layout" class="anchor" href="#full-layout" aria-hidden="true"><span class="octicon octicon-link"></span></a>Full Layout</h3>
 
 <p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout.png" alt="layout"></p>
 
 <p>The Isolation barrier is clearly visible. Perhaps a cutout is appropriate to improve isolation?</p>
 
-<p>Top copper, soldermask, and silkscreen</p>
-
-<hr>
+<h3>
+<a id="top-copper-soldermask-and-silkscreen" class="anchor" href="#top-copper-soldermask-and-silkscreen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Top copper, soldermask, and silkscreen</h3>
 
 <p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout-top.png" alt="layout"></p>
 
-<p>Bottom copper, soldermask and silkscreen</p>
-
-<hr>
+<h3>
+<a id="bottom-copper-soldermask-and-silkscreen" class="anchor" href="#bottom-copper-soldermask-and-silkscreen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bottom copper, soldermask and silkscreen</h3>
 
 <p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout-bottom.png" alt="layout"></p>
 
-<h2>
-<a id="safety" class="anchor" href="#safety" aria-hidden="true"><span class="octicon octicon-link"></span></a>Safety</h2>
+<h1>
+<a id="safety" class="anchor" href="#safety" aria-hidden="true"><span class="octicon octicon-link"></span></a>Safety</h1>
 
 <p>We have domain knowledge in measurement/DSP, but not PSU design and consumer products. From a safety perspective, we have implemented the following:</p>
 
@@ -180,8 +177,8 @@
 <li>EMI, fuse, component rating... etc.</li>
 </ul>
 
-<h2>
-<a id="additional-design-documents" class="anchor" href="#additional-design-documents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Additional design documents</h2>
+<h1>
+<a id="additional-design-documents" class="anchor" href="#additional-design-documents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Additional design documents</h1>
 
 <ul>
 <li><a href="https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2_schematic.pdf">OPQBOX2 pdf schematic</a></li>
@@ -191,8 +188,8 @@
 <li><a href="https://github.com/openpowerquality/opqbox2/tree/master/Schematics/Library">PADS library</a></li>
 </ul>
 
-<h2>
-<a id="summary-of-questions-for-review" class="anchor" href="#summary-of-questions-for-review" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary of questions for review</h2>
+<h1>
+<a id="summary-of-questions-for-review" class="anchor" href="#summary-of-questions-for-review" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary of questions for review</h1>
 
 <p>Here are the issues we are most concerned about.</p>
 
