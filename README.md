@@ -31,7 +31,7 @@ We performed a [pilot study of our first generation hardware and software](http:
 
  * **Support event recording upon power failure.** OPQBox2 adds up to 512k of ferromagnetic RAM (FRAM) IC.  FRAM will be used as a circular buffer, containing up to 1 min of high resolution voltage measurements. FRAM will maintain its state through a power cycle, which will be sent to the cloud once the OPQBox2 comes back online.
 
-* **Connectivity** OPQBox2 is designed to be the deployed as a part of a distributed real-time power quality monitoring network. As such it offers a large number of interface options, including serial, USB, WIFI and cellular network. The initial development will focus on WIFI, and serial communication.
+* **Connectivity.** OPQBox2 is designed to be the deployed as a part of a distributed real-time power quality monitoring network. As such it offers a large number of interface options, including serial, USB, WIFI and cellular network. The initial development will focus on WIFI, and serial communication.
   
 Changes From OPQBox1
 --------------------
@@ -76,13 +76,22 @@ Layout
 
 PCB layout is available in the schematics folder. It is provided as a PADs Layout file, as well as gerbers and pdf/image files. This design calls for a 2 layer FR4 board, and measures 200mm by 80mm.  PCB passed DFM check and is ready to be manufactured. This device is intended as an engineering sample. We expect to go through several iterations refining the design. 
 
+Full Layout
+***********
+
 ![layout](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout.png)
-Full Layout. The Isolation barrier is clearly visible. Perhaps a cutout is appropriate to improve isolation?
+
+The Isolation barrier is clearly visible. Perhaps a cutout is appropriate to improve isolation?
+
+Top copper, soldermask, and silkscreen
+**************************************
 
 ![layout](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout-top.png)
-Top copper, soldermask and silkscreen.
+
+Bottom copper, soldermask and silkscreen
+****************************************
+
 ![layout](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout-bottom.png)
-Bottom copper, soldermask and silkscreen.
 
 Safety
 ------
