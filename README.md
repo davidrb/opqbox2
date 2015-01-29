@@ -97,10 +97,10 @@ We have domain knowledge in measurement/DSP, but not PSU design and consumer pro
 # Additional design documents
 
  
-  * [OPQBOX2 pdf schematic](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2_schematic.pdf)
-  * [OPQBOX2 pdf layout](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2_layout.pdf)
+  * [OPQBOX2 pdf schematic](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opqbox2_schematic.pdf?raw=true)
+  * [OPQBOX2 pdf layout]https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opqbox2_layout.pdf?raw=true)
   * [Bill of Materials](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/Schematics/BOM.txt)
-  * [Mentor graphics PADS schematic of OPQBOX2](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2.sch)
+  * [Mentor graphics PADS schematic of OPQBOX2](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opqbox2.sch?raw=true)
   * [PADS library](https://github.com/openpowerquality/opqbox2/tree/master/Schematics/Library)
   
 
