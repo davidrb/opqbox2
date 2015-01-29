@@ -7,6 +7,17 @@ This repository provides the proposed schematics for the second generation Open 
 
 OPQBox2 is in the final design stage.  We are circulating this design to solicit feedback and make improvements prior to production. We greatly appreciate your willingness to provide us with feedback.
 
+Goals
+-----
+
+The purpose of the OPQBox is to monitor voltage and frequency and detect departures from nominal levels.  It accomplishes this by sampling the waveform 256 times per cycle, extracting power quality measures (including frequency, RMS voltage, and THD), and then uploading data about these measures to the OPQHub service. 
+
+The OPQBox can be configured to send a "heartbeat" message to the OPQHub to indicate that it is connected and functioning. This message normally includes low resolution voltage and frequency data.   
+
+When a power quality disturbance is detected by the OPQBox, it sends a message to the OPQHub that includes high resolution voltage samples. 
+
+We expect that OPQBoxes will be synchronized to within 1 millisecond through the use of NTP. This enables data from multiple OPQBoxes to be used to generate a global perspective on the state of the grid.  As a simple example, it can enable users to determine if their event is local to their own residence or instead grid-wide. 
+
 Operational requirements
 ------------------------
 
@@ -16,7 +27,7 @@ We performed a [pilot study of our first generation hardware and software](http:
 
  * **Safety.**   Our device plugs is ment to  bypass power filters and surge protectors. Thus it incorporates extra protection elements to keep the device operating safely during power disruptions. Fuses will disable OPQBox2 in case of a fault. All of the user accesible components are isolated from the mains.
 
- * **Satisfy IEEE PQ standards.**  OPQBox2 can be plugged into a standard U.S. two prong outlet with expected power at a frequency of 60 Hz and with a voltage of 110 V. It can operate under a frequency range of 50 Hz to 70 Hz and under a voltage range of 80 Vac to 200 Vac. Sampling is phase locked to the utility frequency. The 16 bit 100KSPS ADC allows for 5mV resolution with over 1024 points per grid cycle. On board ARM floating point DSP is able to perform the IEEE 1159 outlined analysis, as well as user defined code.
+ * **Satisfy IEEE PQ standards.**  OPQBox2 can be plugged into a standard U.S. two prong outlet with expected power at a frequency of 60 Hz and with a voltage of 120 V. It can operate under a frequency range of 50 Hz to 70 Hz and under a voltage range of 80 Vac to 200 Vac. Sampling is phase locked to the utility frequency. The 16 bit 100KSPS ADC allows for 5mV resolution with over 1024 points per grid cycle. On board ARM floating point DSP is able to perform the IEEE 1159 outlined analysis, as well as user defined code.
 
  * **Support event recording upon power failure.** OPQBox2 adds up to 512k of ferromagnetic RAM(FRAM) IC.  Fram will be used as a circular buffer, containing up to 1 min of high resolution voltage measurements. Fram will maintain its state through a power cycle, which will be sent to the cloud once the power-grid comes back online.
 
