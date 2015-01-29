@@ -1,5 +1,4 @@
-Overview
---------
+# Overview
 
 The mission of the Open Power Quality project is to design and implement open source hardware, software, and data for low cost, crowd-sourced power quality monitoring, storage, and analysis. For more details, please see our [home page](http://openpowerquality.org).
 
@@ -7,8 +6,7 @@ This repository provides the proposed schematics for the second generation Open 
 
 OPQBox2 is in the final design stage.  We are circulating this design to solicit feedback and make improvements prior to production. We greatly appreciate your willingness to provide us with feedback.
 
-Goal
-----
+# Goal
 
 The goal of OPQBox is to monitor voltage and frequency and detect departures from nominal levels.  It accomplishes this by sampling the waveform 256 times per cycle, extracting power quality measures (including frequency, RMS voltage, and THD), and then uploading data about these measures to the OPQHub service. 
 
@@ -18,8 +16,7 @@ When a power quality disturbance is detected by OPQBox, it sends a message to OP
 
 We expect that OPQBoxes will be synchronized to within 1 millisecond through the use of NTP. This enables data from multiple OPQBoxes to be used to generate a global perspective on the state of the grid.  As a simple example, it can enable users to determine if their event is local to their own residence or instead grid-wide. 
 
-Operational requirements
-------------------------
+# Operational requirements
 
 The design of OPQBox2 is influenced by our experience with the first generation OPQBox (OPQBox1).  Design information about our first generation hardware is available at the [OPQBox1 repository](https://github.com/openpowerquality/opqbox1). 
 
@@ -33,8 +30,7 @@ We performed a [pilot study of our first generation hardware and software](http:
 
 * **Connectivity.** OPQBox2 is designed to be the deployed as a part of a distributed real-time power quality monitoring network. As such it offers a large number of interface options, including serial, USB, WIFI and cellular network. The initial development will focus on WIFI, and serial communication.
   
-Changes From OPQBox1
---------------------
+# Changes From OPQBox1
 
 OPQBox2 is a complete redesign from the previous generation. It replaces the voltage sensing transformer with an isolation amplifier. The sampling rate has increased from 4kSPS to up to 100kSPS. In order to keep up with the faster acquisition a dedicated ARM DSP is used to control the sampling and realtime processing. Here is a summary of component changes in OPQBox2:
 
@@ -49,8 +45,7 @@ OPQBox2 is a complete redesign from the previous generation. It replaces the vol
                 |         | PI can be replaced with CAN/RF/Ethernet/GSM module
 
 
-Capacitive PSU Design
----------------------
+# Capacitive PSU Design
 
 ![capacitive PSU](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/capacitive-psu.png)
 
@@ -60,8 +55,7 @@ Design notes:
   * R25 for bleeding C1 and suppressing spikes.
   * 12mA output, we are driving it at 10mA through a regulator to the isolation amplifier (see below).
 
-Measurement isolation design
-----------------------------
+# Measurement isolation design
 
 ![capacitive PSU](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/measurement-isolation.png)
 
@@ -71,30 +65,27 @@ Design notes:
   * Flame proof, pulse withstanding resistors for voltage measurement
   * [TMOV25SP230M ](http://www.littelfuse.com/products/varistors/thermally-protected/tmov25s/tmov25sp230m.aspx) MOV and a TVC for surge protection. 
 
-Layout
-------
+# Layout
 
 PCB layout is available in the schematics folder. It is provided as a PADs Layout file, as well as gerbers and pdf/image files. This design calls for a 2 layer FR4 board, and measures 200mm by 80mm.  PCB passed DFM check and is ready to be manufactured. This device is intended as an engineering sample. We expect to go through several iterations refining the design. 
 
-Full Layout
-***********
+### Full Layout
+
 
 ![layout](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout.png)
 
 The Isolation barrier is clearly visible. Perhaps a cutout is appropriate to improve isolation?
 
-Top copper, soldermask, and silkscreen
-**************************************
+### Top copper, soldermask, and silkscreen
+
 
 ![layout](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout-top.png)
 
-Bottom copper, soldermask and silkscreen
-****************************************
+### Bottom copper, soldermask and silkscreen
 
 ![layout](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout-bottom.png)
 
-Safety
-------
+# Safety
 
 We have domain knowledge in measurement/DSP, but not PSU design and consumer products. From a safety perspective, we have implemented the following:
 
@@ -103,8 +94,7 @@ We have domain knowledge in measurement/DSP, but not PSU design and consumer pro
   * Circuit Protection (MOV, TVC, etc).
   * EMI, fuse, component rating... etc.
 
-Additional design documents
----------------------------
+# Additional design documents
 
  
   * [OPQBOX2 pdf schematic](https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opq2_schematic.pdf)
@@ -115,8 +105,7 @@ Additional design documents
   
 
 
-Summary of questions for review
--------------------------------
+# Summary of questions for review
 
 Here are the issues we are most concerned about.
 
