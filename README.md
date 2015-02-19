@@ -61,9 +61,10 @@ Design notes:
 
 Design notes:
 
-  * Measurement is isolated via TI [amc1100](http://www.ti.com/product/amc1100) isolation amplifier.[AD7684](http://www.analog.com/en/analog-to-digital-converters/ad-converters/ad7684/products/product.html) ADC.
-  * Flame proof, pulse withstanding resistors for voltage measurement
-  * [TMOV25SP230M ](http://www.littelfuse.com/products/varistors/thermally-protected/tmov25s/tmov25sp230m.aspx) MOV and a TVC for surge protection. 
+  * Measurement is isolated via an isolation amplifier: [TI AMC 1100](http://www.ti.com/product/amc1100).
+  * 16bit, 100 kSPS differential ADC: [Analog Devices AD7684](http://www.analog.com/en/analog-to-digital-converters/ad-converters/ad7684/products/product.html).
+  * Flame proof, pulse withstanding resistors for voltage measurement.
+  * Thermal metal oxide varistors for surge protection: [Littlefuse TMOV25SP230M](http://www.littelfuse.com/products/varistors/thermally-protected/tmov25s/tmov25sp230m.aspx).
 
 # Layout
 
