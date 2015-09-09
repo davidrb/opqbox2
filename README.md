@@ -95,6 +95,12 @@ We have domain knowledge in measurement/DSP, but not PSU design and consumer pro
   * Circuit Protection (MOV, TVC, etc).
   * EMI, fuse, component rating... etc.
 
+# Engineering sample
+
+We recently produced an engineering sample of this design:
+
+![](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/opqbox2-engineering-sample.JPG)
+
 # Additional design documents
 
  
