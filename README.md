@@ -14,7 +14,7 @@ OPQBox can be configured to send a "heartbeat" message to OPQHub to indicate tha
 
 When a power quality disturbance is detected by OPQBox, it sends a message to OPQHub that includes high resolution voltage and frequency data. 
 
-We expect that OPQBoxes will be synchronized to within 1 millisecond through the use of NTP. This enables data from multiple OPQBoxes to be used to generate a global perspective on the state of the grid.  As a simple example, it can enable users to determine if their event is local to their own residence or instead grid-wide. 
+We plant for OPQBox timestamp data to be synchronized to within 1 millisecond, though we are currently experimenting to determine the best technique to accomplish this. Synchronization enables data from multiple OPQBoxes to be used to generate a global perspective on the state of the grid.  As a simple example, it can enable users to determine if their event is local to their own residence or instead grid-wide. 
 
 # Operational requirements
 
