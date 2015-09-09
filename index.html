@@ -49,7 +49,7 @@
 
 <p>When a power quality disturbance is detected by OPQBox, it sends a message to OPQHub that includes high resolution voltage and frequency data. </p>
 
-<p>We expect that OPQBoxes will be synchronized to within 1 millisecond through the use of NTP. This enables data from multiple OPQBoxes to be used to generate a global perspective on the state of the grid.  As a simple example, it can enable users to determine if their event is local to their own residence or instead grid-wide. </p>
+<p>We plant for OPQBox timestamp data to be synchronized to within 1 millisecond, though we are currently experimenting to determine the best technique to accomplish this. Synchronization enables data from multiple OPQBoxes to be used to generate a global perspective on the state of the grid.  As a simple example, it can enable users to determine if their event is local to their own residence or instead grid-wide. </p>
 
 <h1>
 <a id="operational-requirements" class="anchor" href="#operational-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Operational requirements</h1>
@@ -59,9 +59,9 @@
 <p>We performed a <a href="http://openpowerquality.org/technology/g1-pilot-study.html">pilot study of our first generation hardware and software</a>, and one of the results of this study are the following major enhancements for OPQBox2:</p>
 
 <ul>
-<li><p><strong>Safety.</strong>  OPQBox2 is meant to bypass power filters and surge protectors. Thus it incorporates extra protection elements to keep the device operating safely during power disruptions. Fuses will disable OPQBox2 in case of a fault. All of the user accesible components are isolated from the mains.</p></li>
-<li><p><strong>Satisfy IEEE PQ standards.</strong>  OPQBox2 can be plugged into a standard U.S. two prong outlet with expected power at a frequency of 60 Hz and with a voltage of 120 V. It can operate under a frequency range of 50 Hz to 70 Hz and under a voltage range of 80 Vac to 200 Vac. Sampling is phase locked to the utility frequency. The 16 bit 100KSPS ADC allows for 5mV resolution with over 1024 points per grid cycle. On board ARM floating point DSP is able to perform the IEEE 1159 outlined analysis, as well as user defined code.</p></li>
-<li><p><strong>Support event recording upon power failure.</strong> OPQBox2 adds up to 512k of ferromagnetic RAM (FRAM) IC.  FRAM will be used as a circular buffer, containing up to 1 min of high resolution voltage measurements. FRAM will maintain its state through a power cycle, which will be sent to the cloud once the OPQBox2 comes back online.</p></li>
+<li><p><strong>Safety.</strong>  OPQBox2 is meant to bypass power filters and surge protectors. Thus it incorporates extra protection elements to keep the device operating safely during power disruptions. Fuses will disable OPQBox2 in case of a fault. All of the user accesible components are isolated from the mains power.</p></li>
+<li><p><strong>Satisfy IEEE PQ standards.</strong>  OPQBox2 can be plugged into a standard U.S. two prong outlet with expected power at a frequency of 60 Hz and with a voltage of 120 V. It can operate under a frequency range of 50 Hz to 70 Hz and under a voltage range of 80 Vac to 400 Vac. Sampling is phase locked to the utility frequency. The 16 bit 100KSPS ADC allows for 5mV resolution with over 1024 points per grid cycle. On board ARM floating point DSP is able to perform the IEEE 1159 outlined analysis, as well as user defined code.</p></li>
+<li><p><strong>Support event recording upon power failure.</strong> OPQBox2 adds a super capacitor circuit designed to provide power during service interuptions. </p></li>
 </ul>
 
 <ul>
@@ -91,7 +91,7 @@
 <tr>
 <td><strong>Power</strong></td>
 <td>12V transformer</td>
-<td>Isolated 5V DC-DC,  Unisolated capacitive PSU</td>
+<td>Isolated 5V AC-DC,  Isolated 5V DC-DC</td>
 </tr>
 <tr>
 <td><strong>ADC</strong></td>
@@ -117,20 +117,21 @@
 </table>
 
 <h1>
-<a id="capacitive-psu-design" class="anchor" href="#capacitive-psu-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Capacitive PSU Design</h1>
+<a id="psu-design" class="anchor" href="#psu-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>PSU Design</h1>
 
-<p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/capacitive-psu.png" alt="capacitive PSU"></p>
+<p>Main power for the boarf is provided by the IRM-10-5 module. Hot side is powered via ADUM5010 chipscale isolated DC-DC converter.</p>
+
+<p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/power-isolation.png" alt="ADUM5010 PSU design"></p>
 
 <p>Design notes:</p>
 
 <ul>
-<li>Input is fused and protected by a varistor. </li>
-<li>R25 for bleeding C1 and suppressing spikes.</li>
-<li>12mA output, we are driving it at 10mA through a regulator to the isolation amplifier (see below).</li>
+<li>2A of power on the isolated side</li>
+<li>0.22uF super capacitor.(~1s interruption protection)</li>
+<li>250mW of power on the HOT side.</li>
+<li>
+# Measurement isolation design</li>
 </ul>
-
-<h1>
-<a id="measurement-isolation-design" class="anchor" href="#measurement-isolation-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Measurement isolation design</h1>
 
 <p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/measurement-isolation.png" alt="capacitive PSU"></p>
 
@@ -140,30 +141,30 @@
 <li>Measurement is isolated via an isolation amplifier: <a href="http://www.ti.com/product/amc1100">TI AMC 1100</a>.</li>
 <li>16bit, 100 kSPS differential ADC: <a href="http://www.analog.com/en/analog-to-digital-converters/ad-converters/ad7684/products/product.html">Analog Devices AD7684</a>.</li>
 <li>Flame proof, pulse withstanding resistors for voltage measurement.</li>
-<li>Thermal metal oxide varistors for surge protection: <a href="http://www.littelfuse.com/products/varistors/thermally-protected/tmov25s/tmov25sp230m.aspx">Littlefuse TMOV25SP230M</a>.</li>
+<li>Thermal metal oxide varistors for surge protection: </li>
 </ul>
 
 <h1>
 <a id="layout" class="anchor" href="#layout" aria-hidden="true"><span class="octicon octicon-link"></span></a>Layout</h1>
 
-<p>PCB layout is available in the schematics folder. It is provided as a PADs Layout file, as well as gerbers and pdf/image files. This design calls for a 2 layer FR4 board, and measures 200mm by 80mm.  PCB passed DFM check and is ready to be manufactured. This device is intended as an engineering sample. We expect to go through several iterations refining the design. </p>
+<p>PCB layout is available in the schematics folder. It is provided as a PADs Layout file, as well as gerbers and pdf/image files. This design calls for a 4 layer FR4 board, and measures 100mm by 100mm.  PCB is manufactued and is undergoing testing. This device is intended as an engineering sample. We expect to go through several iterations refining the design. </p>
 
 <h3>
 <a id="full-layout" class="anchor" href="#full-layout" aria-hidden="true"><span class="octicon octicon-link"></span></a>Full Layout</h3>
 
-<p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout.png" alt="layout"></p>
+<p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/opqbox2,5full.png" alt="layout"></p>
 
 <p>The Isolation barrier is clearly visible. Perhaps a cutout is appropriate to improve isolation?</p>
 
 <h3>
 <a id="top-copper-soldermask-and-silkscreen" class="anchor" href="#top-copper-soldermask-and-silkscreen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Top copper, soldermask, and silkscreen</h3>
 
-<p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout-top.png" alt="layout"></p>
+<p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/opqbox2.5Top.png" alt="layout"></p>
 
 <h3>
 <a id="bottom-copper-soldermask-and-silkscreen" class="anchor" href="#bottom-copper-soldermask-and-silkscreen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bottom copper, soldermask and silkscreen</h3>
 
-<p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/layout-bottom.png" alt="layout"></p>
+<p><img src="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/opqbox2.5Bottom.png" alt="layout"></p>
 
 <h1>
 <a id="safety" class="anchor" href="#safety" aria-hidden="true"><span class="octicon octicon-link"></span></a>Safety</h1>
@@ -182,7 +183,6 @@
 
 <ul>
 <li><a href="https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opqbox2_schematic.pdf?raw=true">OPQBOX2 pdf schematic</a></li>
-<li><a href="https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opqbox2_layout.pdf?raw=true">OPQBOX2 pdf layout</a></li>
 <li><a href="https://raw.githubusercontent.com/openpowerquality/opqbox2/master/Schematics/BOM.txt">Bill of Materials</a></li>
 <li><a href="https://github.com/openpowerquality/opqbox2/blob/master/Schematics/opqbox2.sch?raw=true">Mentor graphics PADS schematic of OPQBOX2</a></li>
 <li><a href="https://github.com/openpowerquality/opqbox2/tree/master/Schematics/Library">PADS library</a></li>
@@ -210,7 +210,7 @@
     <div id="footer_wrap" class="outer">
       <footer class="inner">
         <p class="copyright">OPQBox2 maintained by <a href="https://github.com/openpowerquality">openpowerquality</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
 
