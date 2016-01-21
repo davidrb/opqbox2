@@ -17,21 +17,31 @@ model {
                 tools.cppCompiler.executable = 'arm-none-eabi-g++'
                 tools.assembler.executable = 'arm-none-eabi-as'
                 tools.linker.executable = 'arm-none-eabi-ld'
+
             }
         }
     }
 
     components {
+        cmsis_boot(NativeLibrarySpec) {
+            targetPlatform 'arm32'
+        }
+
         opq(NativeExecutableSpec) {
             targetPlatform 'arm32'
 
             sources {
                 c {
                     source {
-                        srcDirs "opq/", "cmsis", "cmsis_boot", "stm_lib"
-                        include "**/*.c", "**/**/*.c"
+//                        srcDirs "opq/", "cmsis", "cmsis_boot", "stm_lib"
+                        srcDirs "src/"
+                        include "**/**/*.c", "**/*.c", "**/**/**/*.c"
                     }
                 }
+            }
+
+            binaries.all { 
+                //cCompiler.args '-Icmsis_boot'//, '-Icmsis', '-Istm_lib/inc'
             }
         }
     }
