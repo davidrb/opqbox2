@@ -23,10 +23,6 @@ model {
     components {
         cmsis(NativeLibrarySpec) {
             sources {
-                c.source { 
-                    srcDirs 'src/cmsis/c/'
-                    include '*.c'
-                 }
                 c.exportedHeaders {
                     srcDirs 'src/cmsis/headers'
                 }
@@ -36,12 +32,9 @@ model {
         stm_lib(NativeLibrarySpec) {
             sources {
                 c.lib library: 'cmsis', linkage: 'static'
-                c.source {
-                    srcDirs 'src/stm_lib/src'
-                    include '*.c'
-                }
+
                 c.exportedHeaders {
-                    srcDirs 'src/stm_lib/inc'
+                    srcDirs 'src/stm_lib/headers'
                 }
             }
         }
