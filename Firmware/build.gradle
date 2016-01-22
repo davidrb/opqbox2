@@ -1,5 +1,14 @@
 apply plugin: 'c'
 
+task startOcd(type:Exec) {
+}
+
+task pgm(type:Exec) {
+    dependsOn 'opqExecutable'
+
+    commandLine 'sudo', 'openocd', '-f', 'ocd_program.cfg'
+}
+
 model {
     platforms {
         arm32 {
