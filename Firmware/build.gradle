@@ -56,7 +56,11 @@ model {
                 c.lib library: 'cmsis', linkage: 'static'     
                 c.lib library: 'cmsis_boot', linkage: 'static'     
                 c.lib library: 'stm_lib', linkage: 'static'     
+
             }
+            binaries.all {
+                linker.args '-Tsrc/arm-gcc-link.ld'
+            } 
         }
 
         all {
