@@ -222,7 +222,7 @@ void SysTick_Handler(void)
 	if((oldADC < 0) && (readADC >=0))
 	{
 		OPQFrameBuffer.frames[OPQFrameBuffer.front].crossing = TIM_GetCounter(TIM2);
-		float slope = SAMPLING_PLL_DIVIDER*(readADC - oldADC)/(1000000.0);
+		float slope = SAMPLING_PLL_DIVIDER*(readADC - oldADC)/(1000000.0f);
 		OPQFrameBuffer.frames[OPQFrameBuffer.front].crossing -= readADC/slope;
 
 	}
