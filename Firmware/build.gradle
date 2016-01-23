@@ -1,12 +1,11 @@
 apply plugin: 'c'
 
-task startOcd(type:Exec) {
-}
+defaultTasks 'program'
 
-task pgm(type:Exec) {
+task program(type:Exec) {
+    description 'program the device over JTAG.'
     dependsOn 'opqExecutable'
-
-    commandLine 'sudo', 'openocd', '-f', 'ocd_program.cfg'
+    commandLine 'sudo', 'openocd', '-c', 'program build/exe/opq/opq verify reset exit'
 }
 
 model {
