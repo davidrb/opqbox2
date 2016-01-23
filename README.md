@@ -46,7 +46,7 @@ OPQBox2 is a complete redesign from the previous generation. It replaces the vol
 
 
 # PSU Design
-Main power for the boarf is provided by the IRM-10-5 module. Hot side is powered via ADUM5010 chipscale isolated DC-DC converter.
+Main power for the board is provided by the IRM-10-5 module. Hot side is powered via ADUM5010 chipscale isolated DC-DC converter.
 
 ![ADUM5010 PSU design](https://raw.githubusercontent.com/openpowerquality/opqbox2/master/images/power-isolation.png)
 

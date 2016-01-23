@@ -1,0 +1,81 @@
+apply plugin: 'c'
+
+model {
+    platforms {
+        arm32 {
+            architecture "arm32"
+        }
+    }
+
+    toolChains {
+        crossGcc(Gcc) {
+            target 'arm32'
+
+            eachPlatform { tools ->
+                tools.cCompiler.executable = 'arm-none-eabi-gcc'
+                tools.cppCompiler.executable = 'arm-none-eabi-g++'
+                tools.assembler.executable = 'arm-none-eabi-as'
+                tools.linker.executable = 'arm-none-eabi-ld'
+            }
+        }
+    }
+
+    components {
+        cmsis(NativeLibrarySpec) {
+            sources {
+                c.exportedHeaders {
+                    srcDirs 'src/cmsis/headers'
+                }
+            }
+        }
+
+        cmsis_boot(NativeLibrarySpec) {
+            sources {
+                c.lib library: 'cmsis', linkage: 'static'
+                c.lib library: 'stm_lib', linkage: 'static'
+
+                c.exportedHeaders {
+                    srcDirs 'src/cmsis_boot/headers'
+                }
+            }
+        }
+
+        stm_lib(NativeLibrarySpec) {
+            sources {
+                c.lib library: 'cmsis', linkage: 'static'
+                c.lib library: 'cmsis_boot', linkage: 'static'
+
+                c.exportedHeaders {
+                    srcDirs 'src/stm_lib/headers'
+                }
+            }
+        }
+
+        opq(NativeExecutableSpec) {
+            sources {
+                c.lib library: 'cmsis', linkage: 'static'     
+                c.lib library: 'cmsis_boot', linkage: 'static'     
+                c.lib library: 'stm_lib', linkage: 'static'     
+
+            }
+            binaries.all {
+                linker.args '-Tsrc/arm-gcc-link.ld', '-L/usr/arm-none-eabi/lib/fpu', '-lc', '-lm'
+            } 
+        }
+
+        all {
+            targetPlatform 'arm32'
+
+            binaries.all { 
+                cCompiler.args '-mcpu=cortex-m4', 
+                    '-mthumb',
+                    '-mfpu=fpv4-sp-d16',
+                    '-mfloat-abi=hard',
+                    '-DSTM32F303VC', 
+                    '-DSTM32F30X', 
+                    '-D__FPU_USED',
+                    '-DUSE_STDPERIPH_DRIVER'
+            }
+        }
+    }
+}
