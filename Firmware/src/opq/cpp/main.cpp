@@ -29,10 +29,8 @@
 #include "main.h"
 #include  "config.h"
 #include "datastructures.h"
-#include "stdint.h"
+#include <stdint.h>
 #include <string.h>
-
-
 
 int main(void)
 {

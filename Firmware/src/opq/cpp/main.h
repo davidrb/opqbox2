@@ -36,7 +36,7 @@
 //#include "hw_config.h"
 //#include "usb_pwr.h"
 //#include "platform_config.h"
-#include "math.h"
+#include <math.h>
 
 #endif /* __MAIN_H */
 
