@@ -11,7 +11,8 @@ task cppcheck(type:Exec) {
               '-Isrc/cmsis_boot/headers',
               '-Isrc/stm_lib/headers',
               '--enable=warning',
-              '--enable=performance'
+              '--enable=performance',
+              '--error-exitcode=1'
 }
 
 model {
