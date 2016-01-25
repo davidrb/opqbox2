@@ -1,5 +1,19 @@
 apply plugin: 'c'
 
+task cppcheck(type:Exec) {
+    description 'statically analyze opq code with cppcheck'
+    commandLine 'cppcheck', 'src/opq/cpp',
+              '--std=c++11',
+              '-q',
+              '--force', 
+              '--template', '[{severity}] {file}:{line} "{message}"',
+              '-Isrc/cmsis/headers',
+              '-Isrc/cmsis_boot/headers',
+              '-Isrc/stm_lib/headers',
+              '--enable=warning',
+              '--enable=performance'
+}
+
 model {
     platforms {
         arm32 {
@@ -67,6 +81,8 @@ model {
             targetPlatform 'arm32'
 
             def common_args = [
+                '-Wall',
+                '-Werror',
                 '-mcpu=cortex-m4', 
                 '-mthumb',
                 '-mfpu=fpv4-sp-d16',
