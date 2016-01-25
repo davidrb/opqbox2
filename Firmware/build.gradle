@@ -58,7 +58,8 @@ model {
                 c.lib library: 'stm_lib', linkage: 'static'     
             }
             binaries.all {
-                linker.args '-Tsrc/arm-gcc-link.ld', '-L/usr/arm-none-eabi/lib/fpu', '-lc', '-lm'
+                linker.args '-Tsrc/arm-gcc-link.ld', '-L/usr/arm-none-eabi/lib/fpu', 
+                            '-lc_nano', '-lm', '-lstdc++_nano'
             } 
         }
 
