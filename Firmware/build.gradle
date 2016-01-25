@@ -5,7 +5,9 @@ defaultTasks 'program'
 task program(type:Exec) {
     description 'program the device over JTAG.'
     dependsOn 'opqExecutable'
-    commandLine 'sudo', 'openocd', '-c', 'program build/exe/opq/opq verify reset exit'
+    commandLine 'sudo', 'openocd', 
+                '-f', 'openocd.cfg', 
+                '-c', 'program build/exe/opq/opq verify reset exit'
 }
 
 model {
@@ -76,6 +78,7 @@ model {
 
             binaries.all { 
                 cCompiler.args '-mcpu=cortex-m4', 
+                    '-g',
                     '-mthumb',
                     '-mfpu=fpv4-sp-d16',
                     '-mfloat-abi=hard',
