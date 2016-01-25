@@ -1,5 +1,13 @@
 apply plugin: 'c'
 
+defaultTasks 'program'
+
+task program(type:Exec) {
+    description 'program the device over JTAG.'
+    dependsOn 'opqExecutable'
+    commandLine 'sudo', 'openocd', '-c', 'program build/exe/opq/opq verify reset exit'
+}
+
 model {
     platforms {
         arm32 {
@@ -59,7 +67,7 @@ model {
 
             }
             binaries.all {
-                linker.args '-Tsrc/arm-gcc-link.ld', '-L/usr/arm-none-eabi/lib/fpu', '-lc', '-lm'
+                linker.args '-Tarm-gcc-link.ld', '-L/usr/arm-none-eabi/lib/fpu', '-lc', '-lm'
             } 
         }
 
