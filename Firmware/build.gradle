@@ -2,14 +2,6 @@ apply plugin: 'c'
 
 defaultTasks 'program'
 
-task program(type:Exec) {
-    description 'program the device over JTAG.'
-    dependsOn 'opqExecutable'
-    commandLine 'sudo', 'openocd', 
-                '-f', 'openocd.cfg', 
-                '-c', 'program build/exe/opq/opq verify reset exit'
-}
-
 model {
     platforms {
         arm32 {
@@ -23,9 +15,9 @@ model {
 
             eachPlatform { tools ->
                 tools.cCompiler.executable = 'arm-none-eabi-gcc'
-                tools.cppCompiler.executable = 'arm-none-eabi-g++'
-                tools.assembler.executable = 'arm-none-eabi-as'
-                tools.linker.executable = 'arm-none-eabi-ld'
+                tools.cppCompiler.executable = 'arm-none-eabi-gcc'
+                tools.assembler.executable = 'arm-none-eabi-gcc'
+                tools.linker.executable = 'arm-none-eabi-gcc'
             }
         }
     }
