@@ -69,7 +69,7 @@ int main(void)
 			//Average value.
 			float Average = 0;
 			//Clear the histogram
-			//memset(frame->histogram, 0, HISTOGRAM_SIZE);
+			memset(frame->histogram, 0, HISTOGRAM_SIZE);
 			//Iterate all samples in frame.
 			for(i = 0; i< SAMPLING_FRAME_SIZE; i++)
 			{

@@ -58,10 +58,9 @@ model {
                 c.lib library: 'cmsis', linkage: 'static'     
                 c.lib library: 'cmsis_boot', linkage: 'static'     
                 c.lib library: 'stm_lib', linkage: 'static'     
-
             }
             binaries.all {
-                linker.args '-Tarm-gcc-link.ld', '-L/usr/arm-none-eabi/lib/fpu', '-lc', '-lm'
+                linker.args '-Tarm-gcc-link.ld', '-lc_nano', '-lstdc++_nano'
             } 
         }
 
@@ -69,7 +68,8 @@ model {
             targetPlatform 'arm32'
 
             binaries.all { 
-                cCompiler.args '-mcpu=cortex-m4', 
+                def common = [
+                    '-mcpu=cortex-m4', 
                     '-g',
                     '-mthumb',
                     '-mfpu=fpv4-sp-d16',
@@ -78,7 +78,13 @@ model {
                     '-DSTM32F30X', 
                     '-D__FPU_USED',
                     '-DUSE_STDPERIPH_DRIVER'
-            }
+                ]
+
+                assembler.args(*common)
+                cCompiler.args(*common)
+                cppCompiler.args(*common)
+                linker.args(*common, '--specs=nosys.specs')
+           }
         }
     }
 }
