@@ -1,20 +1,20 @@
 flags = [
-  # General flags
-  '-Wall'
-  ,'-Wextra'
-  ,'-Werror'
+    # General flags
+    '-Wall'
+    ,'-Wextra'
+    ,'-Werror'
 
-  ,'-Wno-attributes'
-  ,'-std=c++11'
-  ,'-x'
-  ,'c++'
+    ,'-Wno-attributes'
+    ,'-std=c++11'
+    ,'-x'
+    ,'c++'
 
-  ,'-Isrc/cmsis/headers'
-  ,'-Isrc/cmsis_boot/headers'
-  ,'-Isrc/stm_lib/headers'
+    ,'-DSTM32F303VC'
+    ,'-DSTM32F30X'
+    ,'-D__FPU_USED'
+    ,'-DUSE_STDPERIPH_DRIVER'
 
-  ,'-DF_CPU=16000000L'
-  ,'-DARDUINO=163'
-  ,'-D__AVR__'
-  ,'-D__AVR_ATmega2560__'
+    ,'-Isrc/cmsis/headers'
+    ,'-Isrc/cmsis_boot/headers'
+    ,'-Isrc/stm_lib/headers'
 ]

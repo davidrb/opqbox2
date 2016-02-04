@@ -91,8 +91,11 @@ int main(void)
 				OPQFrameBuffer.back = 0;
 			}
 			while(USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET);
-			int8_t temp = 'a';
-			USART_SendData(USART3, temp); // Echo Char
+
+			int32_t temp = 12345;
+                        for(int i = 0; i < 4; i++) {
+                            USART_SendData(USART3, *(&temp + i)); // Echo Char
+                        }
 
 		}
 	}
