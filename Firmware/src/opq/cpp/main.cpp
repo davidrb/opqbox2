@@ -32,9 +32,11 @@
 #include "stdint.h"
 #include <string.h>
 
+#include <string>
+#include <sstream>
+#include <cstdint>
 
-
-int main(void)
+int main()
 {
 	//Store our zero crossing here
 	static uint32_t crossing[SAMPLING_FB_SIZE];
@@ -92,9 +94,12 @@ int main(void)
 			}
 			while(USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET);
 
-			int32_t temp = 12345;
-                        for(int i = 0; i < 4; i++) {
-                            USART_SendData(USART3, *(&temp + i)); // Echo Char
+                        std::stringstream ss{};
+                        ss << frame->crossing << '\n';
+
+                        for(auto c : ss.str()) {
+                            USART_SendData(USART3, c); // Echo Char
+                            while(USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET);
                         }
 
 		}
